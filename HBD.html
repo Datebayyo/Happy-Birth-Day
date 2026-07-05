@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎉</title>
+    <style>
+        /* Menggunakan Font yang Elegan */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            /* Mencegah teks diblok/copy */
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0b0b0d;
+            /* Background gelap agar foto lebih stand out */
+            color: #ffffff;
+            overflow-x: hidden;
+            transition: filter 0.3s ease;
+        }
+
+        /* Efek Buram Keamanan saat Pindah Aplikasi (Anti-Screenshot) */
+        body.blur-mode {
+            filter: blur(25px) grayscale(100%);
+        }
+
+        /* --- SECTION 1: FOTO FULL LAYAR --- */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(120deg, rgba(10, 10, 15, 0.25), rgba(0, 0, 0, 0.35)), url('assets/Hallo.jpeg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 94, 168, 0.75) 0 6px, transparent 7px),
+                radial-gradient(circle at 24% 82%, rgba(255, 215, 0, 0.7) 0 5px, transparent 6px),
+                radial-gradient(circle at 74% 16%, rgba(255, 182, 193, 0.7) 0 5px, transparent 6px),
+                radial-gradient(circle at 86% 72%, rgba(255, 215, 0, 0.7) 0 7px, transparent 8px);
+            background-size: 240px 240px, 220px 220px, 210px 210px, 260px 260px;
+            animation: driftConfetti 16s linear infinite;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: fadeInDown 1.5s ease;
+            color: #ffd6e5;
+            text-shadow: 0 1px 0 #7a0037, 0 2px 0 #7a0037, 0 3px 0 #7a0037, 0 0 12px rgba(255, 94, 168, 0.45);
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.2;
+            padding: 0 20px;
+            text-align: center;
+            -webkit-text-stroke: 1.2px #7a0037;
+            text-stroke: 1.2px #7a0037;
+        }
+
+        .party-popper {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: popperFly 3s ease-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+        }
+
+        .popper-1 {
+            top: 12%;
+            left: 12%;
+            animation-delay: 0s;
+        }
+
+        .popper-2 {
+            top: 14%;
+            right: 14%;
+            animation-delay: 0.7s;
+        }
+
+        .popper-3 {
+            bottom: 18%;
+            left: 18%;
+            animation-delay: 1.3s;
+        }
+
+        .popper-4 {
+            bottom: 14%;
+            right: 18%;
+            animation-delay: 2s;
+        }
+
+        /* --- RUNNING TEXT (Happy Birth Day Berjalan) --- */
+        .marquee-container {
+            background: #16161a;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid #24242b;
+            border-bottom: 1px solid #24242b;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            font-weight: 600;
+            color: #ff6b81;
+            font-size: 1.2rem;
+            animation: marquee 15s linear infinite;
+        }
+
+        /* --- SECTION CONTAINER UMUM --- */
+        .section-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #f1f1f1;
+            border-left: 4px solid #ff6b81;
+            padding-left: 10px;
+        }
+
+        /* --- SECTION 2: FOTO UNDANGAN --- */
+        .undangan-box {
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            display: flex;
+            gap: 12px;
+            scroll-snap-type: x proximity;
+        }
+
+        /* --- SECTION 3: FOTO DARI TAHUN KE TAHUN (2 Kolom) --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* --- SECTION 4 & 5: GRID FOTO (4 Kolom) --- */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        /* Styling Media/Foto agar tidak bisa di-drag/klik kanan */
+        .secure-media {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid #24242b;
+            pointer-events: none;
+            /* Kunci klik/drag pada gambar */
+            transition: transform 0.3s ease;
+        }
+
+        .undangan-box .secure-media {
+            flex: 0 0 100%;
+            width: 100%;
+            max-width: none;
+            height: auto;
+            scroll-snap-align: start;
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .grid-4 .secure-media {
+            width: 100%;
+            height: auto;
+            max-height: 430px;
+            object-fit: contain;
+            aspect-ratio: auto;
+        }
+
+        /* --- VIDEO GALLERY SECTION --- */
+        .video-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .video-grid iframe {
+            flex: 0 0 280px;
+            min-width: 280px;
+            height: 420px;
+            border-radius: 12px;
+            border: 1px solid #24242b;
+            pointer-events: auto;
+        }
+
+        /* Animasi */
+        @keyframes marquee {
+            0% {
+                transform: translate3d(100%, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes driftConfetti {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+
+            to {
+                transform: translate3d(18px, 16px, 0);
+            }
+        }
+
+        @keyframes popperFly {
+            0% {
+                transform: scale(0.3) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                transform: scale(1.1) translateY(0) rotate(8deg);
+                opacity: 1;
+            }
+
+            60% {
+                transform: translateY(-45px) rotate(18deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-95px) rotate(35deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsif untuk HP jadul/layar kecil */
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .grid-2,
+            .grid-4 {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 15px;
+                padding-bottom: 10px;
+            }
+
+            .grid-2 .secure-media,
+            .grid-4 .secure-media {
+                flex: 0 0 240px;
+                min-width: 240px;
+                width: auto;
+                height: auto;
+                max-height: 320px;
+                object-fit: contain;
+            }
+
+            /* Di HP jadi geser ke samping agar foto tidak turun ke bawah */
+        }
+    </style>
+</head>
+
+<body oncontextmenu="return false;">
+    <section class="hero-section">
+        <div class="party-popper popper-1">🎉</div>
+        <div class="party-popper popper-2">🎊</div>
+        <div class="party-popper popper-3">✨</div>
+        <div class="party-popper popper-4">🎈</div>
+        <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
+            RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA •</div>
+    </div>
+
+    <section class="section-container" style="text-align: center;">
+        <div class="undangan-box">
+            <img class="secure-media" src="assets/HBD3.jpg" alt="Foto Undangan">
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
+            RICO ADE PRATAMA • HAPPY
+            BIRTHDAY RICO ADE PRATAMA •</div>
+    </div>
+
+    <section class="section-container">
+        <h2 class="section-title">Foto undangan dari tahun ke tahun</h2>
+        <div class="grid-2">
+            <img class="secure-media" src="assets/HBD1.png" alt="Tahun ke tahun 1">
+            <img class="secure-media" src="assets/HBD2.png" alt="Tahun ke tahun 2">
+            <img class="secure-media" src="assets/HBD3.jpg" alt="Tahun ke tahun 3">
+        </div>
+    </section>
+
+    <section class="section-container">
+        <h2 class="section-title">Foto dari kecil ke dewasa</h2>
+        <div class="grid-4">
+            <img class="secure-media" src="assets/FOTO1.jpg" alt="Kecil 1">
+            <img class="secure-media" src="assets/FOTO2.jpg" alt="Kecil 2">
+            <img class="secure-media" src="assets/FOTO3.jpg" alt="Kecil 3">
+        </div>
+    </section>
+
+    <section class="section-container" style="margin-bottom: 100px;">
+        <h2 class="section-title">Video With Friend</h2>
+        <div class="video-grid">
+            <iframe src="https://drive.google.com/file/d/1slF_r2vH_45Pr4ocQo5Iwf9X3IQrd0wo/preview"
+                allowfullscreen></iframe>
+            <iframe src="https://drive.google.com/file/d/1k0mYC6U6TZQb4dKC7PAbIV0rFDivmtiU/preview"
+                allowfullscreen></iframe>
+            <iframe src="https://drive.google.com/file/d/1JYHFqagHCFw4DpDUjp_O_FJRd0C7OmQ6/preview"
+                allowfullscreen></iframe>
+            <iframe src="https://drive.google.com/file/d/1Fn0s4SRBR5vmSCpbRSXJa_8Nuw6I177d/preview"
+                allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <script>
+        // 1. Block kombinasi tombol screenshot & Inspect Element
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === 'PrintScreen' ||
+                e.keyCode === 44 ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'C' || e.key === 'c')) ||
+                (e.metaKey && e.shiftKey && (e.key === '4' || e.key === '3')) || // Blok Mac Screenshot
+                (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.key === 'U' || e.key === 'u')) // Blok Save & View Source
+            ) {
+                e.preventDefault();
+                alert('Demi keamanan, aksi ini dilarang! ✋');
+                return false;
+            }
+        });
+
+        // 2. Efek Pencegahan: Saat layar kehilangan fokus (membuka snipping tool / berpindah aplikasi), buat web jadi BLUR TOTAL
+        window.addEventListener('blur', () => {
+            document.body.classList.add('blur-mode');
+        });
+        window.addEventListener('focus', () => {
+            document.body.classList.remove('blur-mode');
+        });
+
+        // 3. Membersihkan Clipboard jika mereka nekat menekan PrintScreen jadul
+        document.addEventListener('keyup', function (e) {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                alert('Screenshot dihapus dari papan klip!');
+            }
+        });
+    </script>
+</body>
+
+</html>
