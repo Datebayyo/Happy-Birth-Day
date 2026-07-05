@@ -27,9 +27,52 @@
             transition: filter 0.3s ease;
         }
 
+        .page-content {
+            position: relative;
+            min-height: 100vh;
+        }
+
         /* Efek Buram Keamanan saat Pindah Aplikasi (Anti-Screenshot) */
         body.blur-mode {
             filter: blur(25px) grayscale(100%);
+        }
+
+        body.locked {
+            overflow: hidden;
+        }
+
+        body.locked .page-content {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .lock-screen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            background: radial-gradient(circle at top, #111, #000 70%);
+            color: #ffffff;
+            z-index: 99999;
+        }
+
+        body.locked .lock-screen {
+            display: flex;
+        }
+
+        .lock-screen-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .lock-screen strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-top: 6px;
         }
 
         /* --- SECTION 1: FOTO FULL LAYAR --- */
@@ -281,8 +324,11 @@
         /* Responsif untuk HP jadul/layar kecil */
         @media (max-width: 600px) {
             .hero-section {
-                background-size: 140% auto;
+                background:
+                    linear-gradient(120deg, rgba(10, 10, 15, 0.25), rgba(0, 0, 0, 0.35)),
+                    url('assets/Hallo.jpeg') center center / cover no-repeat;
                 background-position: center center;
+                background-size: cover;
             }
 
             .hero-title {
@@ -314,91 +360,134 @@
 </head>
 
 <body oncontextmenu="return false;">
-    <section class="hero-section">
-        <div class="party-popper popper-1">🎉</div>
-        <div class="party-popper popper-2">🎊</div>
-        <div class="party-popper popper-3">✨</div>
-        <div class="party-popper popper-4">🎈</div>
-        <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
-    </section>
+    <div class="page-content">
+        <section class="hero-section">
+            <div class="party-popper popper-1">🎉</div>
+            <div class="party-popper popper-2">🎊</div>
+            <div class="party-popper popper-3">✨</div>
+            <div class="party-popper popper-4">🎈</div>
+            <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
+        </section>
 
-    <div class="marquee-container">
-        <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
-            RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA •</div>
+        <div class="marquee-container">
+            <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
+                RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA •</div>
+        </div>
+
+        <section class="section-container" style="text-align: center;">
+            <div class="undangan-box">
+                <img class="secure-media" src="assets/HBD3.jpg" alt="Foto Undangan">
+            </div>
+        </section>
+
+        <div class="marquee-container">
+            <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
+                RICO ADE PRATAMA • HAPPY
+                BIRTHDAY RICO ADE PRATAMA •</div>
+        </div>
+
+        <section class="section-container">
+            <h2 class="section-title">Foto undangan dari tahun ke tahun</h2>
+            <div class="grid-2">
+                <img class="secure-media" src="assets/HBD1.png" alt="Tahun ke tahun 1">
+                <img class="secure-media" src="assets/HBD2.png" alt="Tahun ke tahun 2">
+                <img class="secure-media" src="assets/HBD3.jpg" alt="Tahun ke tahun 3">
+            </div>
+        </section>
+
+        <section class="section-container">
+            <h2 class="section-title">Foto dari kecil ke dewasa</h2>
+            <div class="grid-4">
+                <img class="secure-media" src="assets/FOTO1.jpg" alt="Kecil 1">
+                <img class="secure-media" src="assets/FOTO2.jpg" alt="Kecil 2">
+                <img class="secure-media" src="assets/FOTO3.jpg" alt="Kecil 3">
+            </div>
+        </section>
+
+        <section class="section-container" style="margin-bottom: 100px;">
+            <h2 class="section-title">Video With Friend</h2>
+            <div class="video-grid">
+                <iframe src="https://drive.google.com/file/d/1slF_r2vH_45Pr4ocQo5Iwf9X3IQrd0wo/preview"
+                    allowfullscreen></iframe>
+                <iframe src="https://drive.google.com/file/d/1k0mYC6U6TZQb4dKC7PAbIV0rFDivmtiU/preview"
+                    allowfullscreen></iframe>
+                <iframe src="https://drive.google.com/file/d/1JYHFqagHCFw4DpDUjp_O_FJRd0C7OmQ6/preview"
+                    allowfullscreen></iframe>
+                <iframe src="https://drive.google.com/file/d/1Fn0s4SRBR5vmSCpbRSXJa_8Nuw6I177d/preview"
+                    allowfullscreen></iframe>
+            </div>
+        </section>
     </div>
 
-    <section class="section-container" style="text-align: center;">
-        <div class="undangan-box">
-            <img class="secure-media" src="assets/HBD3.jpg" alt="Foto Undangan">
+    <div class="lock-screen" aria-hidden="true">
+        <div>
+            <div class="lock-screen-icon">🔒</div>
+            <strong>Halaman dikunci untuk keamanan</strong>
         </div>
-    </section>
-
-    <div class="marquee-container">
-        <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
-            RICO ADE PRATAMA • HAPPY
-            BIRTHDAY RICO ADE PRATAMA •</div>
     </div>
-
-    <section class="section-container">
-        <h2 class="section-title">Foto undangan dari tahun ke tahun</h2>
-        <div class="grid-2">
-            <img class="secure-media" src="assets/HBD1.png" alt="Tahun ke tahun 1">
-            <img class="secure-media" src="assets/HBD2.png" alt="Tahun ke tahun 2">
-            <img class="secure-media" src="assets/HBD3.jpg" alt="Tahun ke tahun 3">
-        </div>
-    </section>
-
-    <section class="section-container">
-        <h2 class="section-title">Foto dari kecil ke dewasa</h2>
-        <div class="grid-4">
-            <img class="secure-media" src="assets/FOTO1.jpg" alt="Kecil 1">
-            <img class="secure-media" src="assets/FOTO2.jpg" alt="Kecil 2">
-            <img class="secure-media" src="assets/FOTO3.jpg" alt="Kecil 3">
-        </div>
-    </section>
-
-    <section class="section-container" style="margin-bottom: 100px;">
-        <h2 class="section-title">Video With Friend</h2>
-        <div class="video-grid">
-            <iframe src="https://drive.google.com/file/d/1slF_r2vH_45Pr4ocQo5Iwf9X3IQrd0wo/preview"
-                allowfullscreen></iframe>
-            <iframe src="https://drive.google.com/file/d/1k0mYC6U6TZQb4dKC7PAbIV0rFDivmtiU/preview"
-                allowfullscreen></iframe>
-            <iframe src="https://drive.google.com/file/d/1JYHFqagHCFw4DpDUjp_O_FJRd0C7OmQ6/preview"
-                allowfullscreen></iframe>
-            <iframe src="https://drive.google.com/file/d/1Fn0s4SRBR5vmSCpbRSXJa_8Nuw6I177d/preview"
-                allowfullscreen></iframe>
-        </div>
-    </section>
 
     <script>
-        // 1. Block kombinasi tombol screenshot & Inspect Element
+        function applyBlurMode() {
+            document.body.classList.add('blur-mode');
+        }
+
+        function removeBlurMode() {
+            document.body.classList.remove('blur-mode');
+        }
+
+        function lockPage() {
+            document.body.classList.add('blur-mode', 'locked');
+        }
+
+        function unlockPage() {
+            document.body.classList.remove('blur-mode', 'locked');
+        }
+
         document.addEventListener('keydown', function (e) {
-            if (
+            const blocked =
                 e.key === 'PrintScreen' ||
                 e.keyCode === 44 ||
                 (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'C' || e.key === 'c')) ||
-                (e.metaKey && e.shiftKey && (e.key === '4' || e.key === '3')) || // Blok Mac Screenshot
-                (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.key === 'U' || e.key === 'u')) // Blok Save & View Source
-            ) {
+                (e.metaKey && e.shiftKey && (e.key === '4' || e.key === '3')) ||
+                (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.key === 'U' || e.key === 'u')) ||
+                e.key === 'F12' ||
+                (e.ctrlKey && e.key === 'Shift');
+
+            if (blocked) {
                 e.preventDefault();
+                e.stopPropagation();
+                lockPage();
                 alert('Demi keamanan, aksi ini dilarang! ✋');
                 return false;
             }
         });
 
-        // 2. Efek Pencegahan: Saat layar kehilangan fokus (membuka snipping tool / berpindah aplikasi), buat web jadi BLUR TOTAL
-        window.addEventListener('blur', () => {
-            document.body.classList.add('blur-mode');
-        });
-        window.addEventListener('focus', () => {
-            document.body.classList.remove('blur-mode');
+        window.addEventListener('blur', lockPage);
+        window.addEventListener('focus', unlockPage);
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                lockPage();
+            } else {
+                unlockPage();
+            }
         });
 
-        // 3. Membersihkan Clipboard jika mereka nekat menekan PrintScreen jadul
+        document.addEventListener('copy', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('cut', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('paste', function (e) {
+            e.preventDefault();
+        });
+
         document.addEventListener('keyup', function (e) {
             if (e.key === 'PrintScreen') {
-                navigator.clipboard.writeText('');
+                lockPage();
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText('').catch(() => { });
+                }
                 alert('Screenshot dihapus dari papan klip!');
             }
         });
