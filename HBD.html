@@ -324,14 +324,31 @@
         /* Responsif untuk HP jadul/layar kecil */
         @media (max-width: 600px) {
             .hero-section {
+                display: none;
+            }
+
+            .mobile-hero-stack {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .mobile-hero-panel {
+                position: relative;
+                width: 100%;
+                min-height: 100vh;
                 background:
                     linear-gradient(120deg, rgba(10, 10, 15, 0.25), rgba(0, 0, 0, 0.35)),
                     url('assets/Hallo.jpeg') center center / cover no-repeat;
-                background-position: center center;
                 background-size: cover;
+                background-position: center center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
             }
 
-            .hero-title {
+            .mobile-hero-panel .hero-title {
                 font-size: 2rem;
             }
 
@@ -368,6 +385,30 @@
             <div class="party-popper popper-4">🎈</div>
             <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
         </section>
+
+        <div class="mobile-hero-stack" aria-hidden="true">
+            <div class="mobile-hero-panel">
+                <div class="party-popper popper-1">🎉</div>
+                <div class="party-popper popper-2">🎊</div>
+                <div class="party-popper popper-3">✨</div>
+                <div class="party-popper popper-4">🎈</div>
+                <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
+            </div>
+            <div class="mobile-hero-panel">
+                <div class="party-popper popper-1">🎉</div>
+                <div class="party-popper popper-2">🎊</div>
+                <div class="party-popper popper-3">✨</div>
+                <div class="party-popper popper-4">🎈</div>
+                <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
+            </div>
+            <div class="mobile-hero-panel">
+                <div class="party-popper popper-1">🎉</div>
+                <div class="party-popper popper-2">🎊</div>
+                <div class="party-popper popper-3">✨</div>
+                <div class="party-popper popper-4">🎈</div>
+                <h1 class="hero-title">Happy Birth Day RICO ADE PRATAMA</h1>
+            </div>
+        </div>
 
         <div class="marquee-container">
             <div class="marquee-text">HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY RICO ADE PRATAMA • HAPPY BIRTHDAY
